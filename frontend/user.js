@@ -43,7 +43,7 @@ document.getElementById('navToggle').addEventListener('click', () => {
 // Logout
 document.getElementById('logoutBtn').addEventListener('click', () => {
   localStorage.removeItem('token');
-  location.replace('login.html');
+  location.replace('index.html');
 });
 
 // Ambil harga emas dari API

@@ -133,15 +133,27 @@ body {
 
 /* ========== Button ========== */
 .btn {
-  background: linear-gradient(to right, #3498db, #2980b9);
-  color: white;
+  background-color: #f5b301; /* warna emas */
+  color: #fff;
+  padding: 12px 24px;
   border: none;
-  padding: 0.6rem 1.4rem;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  border-radius: 6px;
-  font-weight: 500;
-  transition: background 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
+
+.btn:hover {
+  background-color: #dba600; /* warna emas gelap saat hover */
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
 
 .btn:hover {
   background: #2471a3;
