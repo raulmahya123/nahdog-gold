@@ -29,6 +29,10 @@ document.addEventListener('DOMContentLoaded', () => {
   setupTabToggle();
   setupAddressToggle();
   setupHargaCalculation();
+  fetchProdukPerhiasan();         // isi dropdown
+  setupAddressTogglePerhiasan(); // toggle alamat COD
+setupHargaPerhiasanCalculation(); // hitung total otomatis
+
 });
 
 // Toggle navbar (mobile)
@@ -187,3 +191,121 @@ document.getElementById('jualForm').addEventListener('submit', async (e) => {
     responseEl.textContent = 'Gagal mengirim data';
   }
 });
+
+
+// Fetch produk perhiasan ke dropdown saat halaman dimuat
+async function fetchProdukPerhiasan() {
+  const select = document.getElementById('produkSelect');
+  select.innerHTML = '<option value="">Memuat produk...</option>';
+
+  try {
+    const res = await fetch('http://localhost:5000/api/perhiasan/produk', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      }
+    });
+    const data = await res.json();
+
+    if (res.ok && Array.isArray(data.products)) {
+      select.innerHTML = '<option value="">-- Pilih Produk --</option>';
+      data.products.forEach(prod => {
+        const option = document.createElement('option');
+        option.value = prod.id;
+        option.textContent = `${prod.name} - Rp ${parseInt(prod.price).toLocaleString()}`;
+        select.appendChild(option);
+      });
+    } else {
+      select.innerHTML = '<option value="">Gagal memuat produk</option>';
+    }
+  } catch {
+    select.innerHTML = '<option value="">Error jaringan</option>';
+  }
+}
+
+// Submit form jual perhiasan
+document.getElementById('jualPerhiasanForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+  const responseEl = document.getElementById('perhiasanResponse');
+
+  responseEl.textContent = 'Mengirim...';
+
+  try {
+    const res = await fetch('http://localhost:5000/api/perhiasan/jual', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`
+      },
+      body: formData
+    });
+
+    const data = await res.json();
+    responseEl.textContent = res.ok ? 'Berhasil dikirim!' : data.message || 'Gagal mengirim';
+    if (res.ok) form.reset();
+  } catch {
+    responseEl.textContent = 'Gagal mengirim data';
+  }
+});
+
+// Tambahkan juga delivery toggle untuk form jual perhiasan
+function setupAddressTogglePerhiasan() {
+  const select = document.getElementById('deliveryPerhiasan');
+  const addressField = document.querySelector('#jualPerhiasanForm .address-field');
+
+  function toggle() {
+    if (select.value === 'cod') {
+      addressField.style.display = 'block';
+    } else {
+      addressField.style.display = 'none';
+      addressField.value = '';
+    }
+  }
+
+  toggle(); // saat pertama load
+  select.addEventListener('change', toggle);
+}
+
+function setupHargaPerhiasanCalculation() {
+  const select = document.getElementById('produkSelect');
+  const qtyInput = document.getElementById('jumlahPerhiasan');
+  const totalEl = document.getElementById('totalHargaPerhiasan');
+
+  let produkMap = new Map();
+
+  // Fetch dan simpan data produk ke dalam Map untuk akses cepat harga
+  fetch('http://localhost:5000/api/perhiasan/produk', {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      if (Array.isArray(data.products)) {
+        data.products.forEach(prod => {
+          produkMap.set(prod.id.toString(), parseFloat(prod.price));
+        });
+
+        // Kalkulasi saat produk atau jumlah berubah
+        function updateTotal() {
+          const id = select.value;
+          const qty = parseInt(qtyInput.value);
+          const price = produkMap.get(id) || 0;
+
+          if (id && !isNaN(qty)) {
+            const total = qty * price;
+            totalEl.textContent = `Total: Rp ${total.toLocaleString()}`;
+          } else {
+            totalEl.textContent = '';
+          }
+        }
+
+        select.addEventListener('change', updateTotal);
+        qtyInput.addEventListener('input', updateTotal);
+      }
+    })
+    .catch(() => {
+      totalEl.textContent = 'Gagal menghitung total';
+    });
+}

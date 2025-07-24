@@ -8,15 +8,13 @@
 </head>
 <body>
   <nav class="navbar">
-    <!-- Tambahkan logo di navbar -->
-<div class="brand">
-  <img src="logo.jpeg" alt="Logo GoldApp" class="logo" />
-  GoldApp
-</div>
-
+    <div class="brand">
+      <img src="logo.jpeg" alt="Logo GoldApp" class="logo" />
+      GoldApp
+    </div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#">Beranda</a></li>
-      <li><a href="#harga">Harga Emas</a></li>
+      <li><a href="#harga">Harga Antam</a></li>
       <li><a href="#transaksi">Transaksi</a></li>
     </ul>
     <button id="logoutBtn" class="nav-logout">Logout</button>
@@ -25,21 +23,28 @@
 
   <header class="hero">
     <h1>Selamat Datang, <span id="userEmail">Pengguna</span>!</h1>
-    <p>Lihat harga emas terkini di bawah ini.</p>
- 
-</header>
-<div class="slider-container">
-  <div class="slider-track">
-    <img src="content.jpeg" alt="Foto 1" class="slide-image" />
-    <img src="content.jpeg" alt="Foto 2" class="slide-image" />
-    <img src="content.jpeg" alt="Foto 3" class="slide-image" />
-    <!-- Tambah gambar lain jika perlu -->
+    <p>Lihat harga Antam terkini di bawah ini.</p>
+  </header>
+
+  <div class="slider-container">
+    <div class="slider-track">
+      <img src="content.jpeg" alt="Foto 1" class="slide-image" />
+      <img src="content.jpeg" alt="Foto 2" class="slide-image" />
+      <img src="content.jpeg" alt="Foto 3" class="slide-image" />
+    </div>
   </div>
-</div>
-
-
 
   <main class="main-content">
+<!-- TradingView Mini Chart: Emas (XAU/USD) -->
+<div class="gold-chart-container">
+  <iframe 
+    src="https://s.tradingview.com/embed-widget/mini-symbol-overview/?locale=id#%7B%22symbol%22%3A%22OANDA%3AXAUUSD%22%2C%22width%22%3A%22100%25%22%2C%22height%22%3A%22220%22%2C%22dateRange%22%3A%221D%22%2C%22colorTheme%22%3A%22light%22%2C%22isTransparent%22%3Afalse%2C%22autosize%22%3Atrue%7D" 
+    style="border: none; width: 100%; height: 220px;" 
+    allowtransparency="true" 
+    scrolling="no">
+  </iframe>
+</div>
+
     <section id="harga" class="section">
       <h2>Harga Antam Hari Ini</h2>
       <div id="goldPrice" class="price-box">Memuat...</div>
@@ -47,11 +52,12 @@
     </section>
 
     <section id="transaksi" class="section">
-      <h2>Transaksi Emas</h2>
+      <h2>Transaksi Antam</h2>
 
       <div class="tabs">
-        <button class="tab-btn active" data-tab="beli">Beli Emas</button>
-        <button class="tab-btn" data-tab="jual">Jual Emas</button>
+        <button class="tab-btn active" data-tab="beli">Beli Antam</button>
+        <button class="tab-btn" data-tab="jual">Jual Antam</button>
+        <button class="tab-btn" data-tab="jualPerhiasan">Jual Perhiasan</button>
       </div>
 
       <div class="form-container">
@@ -60,17 +66,13 @@
           <h3>Form Pembelian</h3>
           <input type="number" id="jumlahBeli" name="jumlah" placeholder="Masukkan jumlah gram" required />
           <div id="totalHargaBeli" class="total-harga"></div>
-
           <select name="deliveryMethod" id="deliveryBeli">
             <option value="ambil">Ambil di tempat</option>
             <option value="cod">COD (dikirim)</option>
           </select>
-
           <input type="text" name="address" placeholder="Alamat (jika COD)" class="address-field" />
-          
           <label>Bukti Transfer</label>
           <input type="file" name="proof" accept="image/*" required />
-
           <button type="submit">Kirim Pembelian</button>
           <p class="response" id="beliResponse"></p>
         </form>
@@ -80,20 +82,40 @@
           <h3>Form Penjualan</h3>
           <input type="number" id="jumlahJual" name="jumlah" placeholder="Masukkan jumlah gram" required />
           <div id="totalHargaJual" class="total-harga"></div>
-
           <select name="deliveryMethod" id="deliveryJual">
             <option value="ambil">Antar ke lokasi</option>
             <option value="cod">Temui petugas (COD)</option>
           </select>
-
           <input type="text" name="address" placeholder="Alamat (jika COD)" class="address-field" />
-          
           <label>Bukti Transfer</label>
           <input type="file" name="proof" accept="image/*" required />
-
           <button type="submit">Kirim Penjualan</button>
           <p class="response" id="jualResponse"></p>
         </form>
+
+        <!-- Form Jual Perhiasan -->
+      <!-- Form Jual Perhiasan -->
+<form id="jualPerhiasanForm" class="tab-content">
+  <h3>Form Penjualan Perhiasan</h3>
+  <label for="produkSelect">Pilih Produk Perhiasan</label>
+  <select name="productId" id="produkSelect" required></select>
+
+  <label for="jumlahPerhiasan">Jumlah Produk</label>
+  <input type="number" id="jumlahPerhiasan" name="quantity" placeholder="Jumlah perhiasan" required />
+
+  <div id="totalHargaPerhiasan" class="total-harga">Total: Rp 0</div>
+
+  <label for="deliveryPerhiasan">Metode Pengiriman</label>
+  <select name="deliveryMethod" id="deliveryPerhiasan">
+    <option value="antar">Antar ke lokasi</option>
+    <option value="cod">Temui petugas (COD)</option>
+  </select>
+
+  <input type="text" name="address" placeholder="Alamat (jika COD)" class="address-field" />
+  <button type="submit">Kirim Penjualan</button>
+  <p class="response" id="perhiasanResponse"></p>
+</form>
+
       </div>
     </section>
   </main>
