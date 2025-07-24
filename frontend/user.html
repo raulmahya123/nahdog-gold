@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>User Dashboard</title>
+  <link rel="stylesheet" href="user.css" />
+</head>
+<body>
+  <nav class="navbar">
+    <!-- Tambahkan logo di navbar -->
+<div class="brand">
+  <img src="logo.jpeg" alt="Logo GoldApp" class="logo" />
+  GoldApp
+</div>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#">Beranda</a></li>
+      <li><a href="#harga">Harga Emas</a></li>
+      <li><a href="#transaksi">Transaksi</a></li>
+    </ul>
+    <button id="logoutBtn" class="nav-logout">Logout</button>
+    <div class="nav-toggle" id="navToggle">&#9776;</div>
+  </nav>
+
+  <header class="hero">
+    <h1>Selamat Datang, <span id="userEmail">Pengguna</span>!</h1>
+    <p>Lihat harga emas terkini di bawah ini.</p>
+ 
+</header>
+<div class="slider-container">
+  <div class="slider-track">
+    <img src="content.jpeg" alt="Foto 1" class="slide-image" />
+    <img src="content.jpeg" alt="Foto 2" class="slide-image" />
+    <img src="content.jpeg" alt="Foto 3" class="slide-image" />
+    <!-- Tambah gambar lain jika perlu -->
+  </div>
+</div>
+
+
+
+  <main class="main-content">
+    <section id="harga" class="section">
+      <h2>Harga Antam Hari Ini</h2>
+      <div id="goldPrice" class="price-box">Memuat...</div>
+      <button id="refreshPrice" class="btn">Refresh Harga</button>
+    </section>
+
+    <section id="transaksi" class="section">
+      <h2>Transaksi Emas</h2>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="beli">Beli Emas</button>
+        <button class="tab-btn" data-tab="jual">Jual Emas</button>
+      </div>
+
+      <div class="form-container">
+        <!-- Form Beli -->
+        <form id="beliForm" class="tab-content active" enctype="multipart/form-data">
+          <h3>Form Pembelian</h3>
+          <input type="number" id="jumlahBeli" name="jumlah" placeholder="Masukkan jumlah gram" required />
+          <div id="totalHargaBeli" class="total-harga"></div>
+
+          <select name="deliveryMethod" id="deliveryBeli">
+            <option value="ambil">Ambil di tempat</option>
+            <option value="cod">COD (dikirim)</option>
+          </select>
+
+          <input type="text" name="address" placeholder="Alamat (jika COD)" class="address-field" />
+          
+          <label>Bukti Transfer</label>
+          <input type="file" name="proof" accept="image/*" required />
+
+          <button type="submit">Kirim Pembelian</button>
+          <p class="response" id="beliResponse"></p>
+        </form>
+
+        <!-- Form Jual -->
+        <form id="jualForm" class="tab-content" enctype="multipart/form-data">
+          <h3>Form Penjualan</h3>
+          <input type="number" id="jumlahJual" name="jumlah" placeholder="Masukkan jumlah gram" required />
+          <div id="totalHargaJual" class="total-harga"></div>
+
+          <select name="deliveryMethod" id="deliveryJual">
+            <option value="ambil">Antar ke lokasi</option>
+            <option value="cod">Temui petugas (COD)</option>
+          </select>
+
+          <input type="text" name="address" placeholder="Alamat (jika COD)" class="address-field" />
+          
+          <label>Bukti Transfer</label>
+          <input type="file" name="proof" accept="image/*" required />
+
+          <button type="submit">Kirim Penjualan</button>
+          <p class="response" id="jualResponse"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 GoldApp. All rights reserved.</p>
+  </footer>
+
+  <script src="user.js"></script>
+</body>
+</html>

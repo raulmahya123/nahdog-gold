@@ -1,0 +1,239 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  background: #f5f5f5;
+  line-height: 1.6;
+}
+
+/* ==== Navbar ==== */
+.navbar {
+  background-color: #333;
+  color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.logo {
+  height: 40px;
+  width: auto;
+}
+
+/* Navigation Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: gold;
+}
+
+/* Logout Button */
+.nav-logout {
+  background: red;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.nav-logout:hover {
+  background: darkred;
+}
+
+/* Toggle for Mobile */
+.nav-toggle {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* ==== Hero ==== */
+.hero {
+  background: gold;
+  color: black;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Foto Pengguna */
+.profile-pic {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.profile-pic img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #333;
+}
+
+/* ==== Main Sections ==== */
+.section {
+  padding: 2rem;
+}
+
+.price-box {
+  background: white;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px solid #ccc;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.btn {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0056b3;
+}
+
+/* ==== Tabs & Forms ==== */
+.tabs {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.tab-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.tab-btn.active {
+  background: gold;
+}
+
+.tab-content {
+  display: none;
+  background: white;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+input,
+select {
+  display: block;
+  margin: 0.5rem 0 1rem;
+  padding: 0.5rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.address-field {
+  display: block;
+}
+
+.total-harga {
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+.response {
+  margin-top: 0.5rem;
+  color: green;
+}
+
+/* ==== Footer ==== */
+.footer {
+  background: #333;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+/* ==== Responsive ==== */
+@media screen and (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #444;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+    padding: 1rem;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: block;
+    color: white;
+  }
+
+  .navbar {
+    flex-wrap: wrap;
+  }
+}
+.image-slider {
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 1rem 0;
+  scroll-behavior: smooth;
+}
+
+.slider-track {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.slider-track img {
+  height: 400px;
+  width: calc(33.33% - 1rem); /* 3 gambar dalam 1 baris */
+  border-radius: 10px;
+  object-fit: cover;
+  flex-shrink: 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
