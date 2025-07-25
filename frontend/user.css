@@ -301,3 +301,103 @@ select:focus {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background: white;
 }
+
+
+.section {
+    background-color: #fff;
+    padding: 40px 20px;
+    margin: 20px auto;
+    border-radius: 10px;
+    max-width: 900px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .section h2 {
+    text-align: center;
+    color: #444;
+    margin-bottom: 20px;
+  }
+
+  /* Harga Antam */
+  .price-box {
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+    background-color: #ffebcc;
+    color: #b36b00;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ffc107;
+  }
+
+  #refreshPrice {
+    display: block;
+    margin: 0 auto;
+    background-color: #ffc107;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+  }
+
+  #refreshPrice:hover {
+    background-color: #e0a800;
+  }
+
+  /* Daftar Produk */
+  .container {
+    max-width: 1000px;
+    margin: 30px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  table.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  table thead {
+    background-color: #007bff;
+    color: white;
+  }
+
+  table th, table td {
+    padding: 12px 15px;
+    border: 1px solid #dee2e6;
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  @media (max-width: 768px) {
+    .section, .container {
+      padding: 20px;
+    }
+
+    table th, table td {
+      font-size: 14px;
+      padding: 8px;
+    }
+
+    .price-box {
+      font-size: 1.4rem;
+    }
+
+    #refreshPrice {
+      width: 100%;
+    }
+  }

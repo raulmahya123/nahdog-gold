@@ -309,3 +309,29 @@ function setupHargaPerhiasanCalculation() {
       totalEl.textContent = 'Gagal menghitung total';
     });
 }
+
+
+ fetch('http://localhost:5000/api/perhiasan/produk')
+      .then(res => res.json())
+      .then(data => {
+        const body = document.getElementById('produk-body');
+        body.innerHTML = '';
+
+        data.products.forEach(prod => {
+          const row = `
+            <tr>
+              <td>${prod.id}</td>
+              <td>${prod.name}</td>
+              <td>${prod.description}</td>
+              <td>Rp ${parseInt(prod.price).toLocaleString('id-ID')}</td>
+              <td>${new Date(prod.created_at).toLocaleString('id-ID')}</td>
+            </tr>
+          `;
+          body.innerHTML += row;
+        });
+      })
+      .catch(err => {
+        document.getElementById('produk-body').innerHTML =
+          `<tr><td colspan="5" class="text-danger text-center">Gagal memuat data</td></tr>`;
+        console.error(err);
+      });
