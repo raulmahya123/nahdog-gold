@@ -2,6 +2,7 @@ require('dotenv').config();  // Memuat file .env
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');  // <-- Tambahkan ini
+const path = require('path');
 
 const authRoutes = require('./routes/authRoutes');
 const goldRoutes = require('./routes/goldRoutes');  // Rute untuk transaksi emas
@@ -19,7 +20,7 @@ app.use(bodyParser.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/gold', goldRoutes);
 app.use('/api/perhiasan', jewelryRoutes);
-
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Middleware error handler (opsional)
 app.use((err, req, res, next) => {
   console.error(err.stack);
